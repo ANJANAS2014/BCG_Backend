@@ -18,7 +18,6 @@ def viewData(request):
         
         return JsonResponse({"values_customer": list(values_customer)},status=200)
     except Exception as e:
-        print(e)
         return JsonResponse({'message': 'Server Exception.'+str(e)}, status=500)
 
 @csrf_exempt
@@ -58,7 +57,6 @@ def updateData(request):
     try:
         
         jsonReq = json.loads(request.body)['formvalues']
-        print("jsonReq",jsonReq)
 
         PolicyDetails.objects.filter(policy_id = jsonReq['policy_id']).update(\
             date_of_purchase = jsonReq['date_of_purchase'],customer_id = jsonReq['customer_id'],\
@@ -69,7 +67,6 @@ def updateData(request):
         return JsonResponse({"message":"Success","values_customer": list(values_customer)},status=200)
 
     except Exception as e:
-        print(e)
         return JsonResponse({'message': 'Server Exception.'+str(e)}, status=500)
     
 
